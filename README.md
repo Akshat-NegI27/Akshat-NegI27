@@ -1,4 +1,4 @@
-![logo](https://github.com/Akshat-NegI27/Akshat-NegI27/blob/main/logo-banner.jpg)
+![logo](https://github.com/Akshat-NegI27/Akshat-NegI27/blob/main/logo-banner.png)
 
 <h1 align="center">Hi 👋, This is Akshat Negi</h1>
 <h3 align="center">A passionate frontend developer from India</h3>
