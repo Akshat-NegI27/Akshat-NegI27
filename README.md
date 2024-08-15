@@ -1,4 +1,9 @@
-![logo](https://github.com/Akshat-NegI27/Akshat-NegI27/blob/main/logo.png)
+![logo](https://github.com/Akshat-NegI27/Akshat-NegI27/blob/main/logo2.gif)
+
+<p align="center">
+<img src="https://readme-typing-svg.herokuapp.com?font=Oxanium&weight=800&size=21&pause=1000&color=F7F7F7&center=true&vCenter=true&width=434&height=62&lines=THIS+IS+AKSHAT+NEGI;SPECIALIZED+IN+CYBER+SECURITY"></a></p>
+
+<!--![logo](https://github.com/Akshat-NegI27/Akshat-NegI27/blob/main/logo.png) -->
 
 <h1 align="center">Hi 👋, This is Akshat Negi</h1>
 <h3 align="center">A passionate frontend developer from India</h3>
