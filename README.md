@@ -1,9 +1,9 @@
-![logo](https://github.com/Akshat-NegI27/Akshat-NegI27/blob/main/logo-banner.png)
+![logo](https://github.com/Akshat-NegI27/Akshat-NegI27/blob/main/logo.png)
 
 <h1 align="center">Hi 👋, This is Akshat Negi</h1>
 <h3 align="center">A passionate frontend developer from India</h3>
 
-<img align="right" alt="coding" width="400" src="[https://user-images.githubusercontent.com/55389276/140866485-8fb1c876-9a8f-4d6a-98dc-08c4981eaf70.gif](https://steamuserimages-a.akamaihd.net/ugc/244710630325715238/DBF2154CE721814E9B0F8C6B14D1578A92A3F7B1/?imw=5000&imh=5000&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=false)">
+<img align="right" alt="coding" width="400" src="https://steamuserimages-a.akamaihd.net/ugc/244710630325715238/DBF2154CE721814E9B0F8C6B14D1578A92A3F7B1/?imw=5000&imh=5000&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=false">
 
 
 <p align="left"> <img src="https://komarev.com/ghpvc/?username=akshat-negi27&label=Profile%20views&color=0e75b6&style=flat" alt="akshat-negi27" /> </p>
