@@ -1,11 +1,14 @@
-![logo](https://github.com/Akshat-NegI27/Akshat-NegI27/blob/main/logo2.gif)
+<!-- ![logo](https://github.com/Akshat-NegI27/Akshat-NegI27/blob/main/logo.png) -->
+<p align="center">
+<img align="center" alt="coding"  width="500" src="https://github.com/Akshat-NegI27/Akshat-NegI27/blob/main/logo2.gif">
+</p>
 
 <p align="center">
 <img src="https://readme-typing-svg.herokuapp.com?font=Oxanium&weight=800&size=21&pause=1000&color=F7F7F7&center=true&vCenter=true&width=434&height=62&lines=THIS+IS+AKSHAT+NEGI;SPECIALIZED+IN+CYBER+SECURITY"></a></p>
 
-<!--![logo](https://github.com/Akshat-NegI27/Akshat-NegI27/blob/main/logo.png) -->
-
+<!--
 <h1 align="center">Hi 👋, This is Akshat Negi</h1>
+-->
 <h3 align="center">A passionate frontend developer from India</h3>
 
 <img align="right" alt="coding" width="400" src="https://steamuserimages-a.akamaihd.net/ugc/244710630325715238/DBF2154CE721814E9B0F8C6B14D1578A92A3F7B1/?imw=5000&imh=5000&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=false">
