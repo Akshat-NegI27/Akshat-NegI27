@@ -9,7 +9,7 @@
 <!--
 <h1 align="center">Hi 👋, This is Akshat Negi</h1>
 -->
-<h3 align="center">A passionate frontend developer from India</h3>
+<h3 align="center">B.Tech CSE Student | Specializing in Cybersecurity & Digital Forensics | Web Developer</h3>
 
 <img align="right" alt="coding" width="400" src="https://steamuserimages-a.akamaihd.net/ugc/244710630325715238/DBF2154CE721814E9B0F8C6B14D1578A92A3F7B1/?imw=5000&imh=5000&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=false">
 
