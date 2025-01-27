@@ -25,4 +25,4 @@
 
 ![](https://raw.githubusercontent.com/Akshat-NegI27/Rich-Git-Stats/master/generated/overview.svg#gh-dark-mode-only)
 ![](https://raw.githubusercontent.com/Akshat-NegI27/Rich-Git-Stats/master/generated/languages.svg#gh-dark-mode-only)
-<p><img align="center" src="https://github-readme-streak-stats.herokuapp.com/?user=akshat-negi27&" alt="akshat-negi27" /></p>
+[![GitHub Streak](https://streak-stats.demolab.com?user=Akshat-NegI27&theme=dark)](https://git.io/streak-stats)
