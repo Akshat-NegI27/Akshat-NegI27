@@ -20,7 +20,7 @@
 
 
  <hr/>
- 
+
 <h2 align="center">⚒️ Languages-Frameworks-Tools ⚒️</h2>
 <br/>
 <div align="center">
@@ -50,9 +50,46 @@
 
 <!-- Socials 
 <div align="center">
-  
 ## 🌐 Connect with Me 🍬
 [![Behance](https://img.shields.io/badge/Behance-1769ff?logo=behance&logoColor=white)](https://behance.net/technologyhell) [![Discord](https://img.shields.io/badge/Discord-%237289DA.svg?logo=discord&logoColor=white)](https://discord.gg/6ME9TDt) [![Facebook](https://img.shields.io/badge/Facebook-%231877F2.svg?logo=Facebook&logoColor=white)](https://facebook.com/technologyhell) [![Instagram](https://img.shields.io/badge/Instagram-%23E4405F.svg?logo=Instagram&logoColor=white)](https://instagram.com/technologyhell) [![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white)](https://linkedin.com/in/nitishsinghslg) [![Twitch](https://img.shields.io/badge/Twitch-%239146FF.svg?logo=Twitch&logoColor=white)](https://twitch.tv/technologyhell) [![X](https://img.shields.io/badge/X-black.svg?logo=X&logoColor=white)](https://x.com/technologyhell) [![YouTube](https://img.shields.io/badge/YouTube-%23FF0000.svg?logo=YouTube&logoColor=white)](https://youtube.com/@technologyhell) 
 
 </div>
 -->
+
+<hr/>
+<h2 align="center">⚡ Socials & Profiles ⚡</h2>
+
+
+<p align="center">
+  <!-- X (formerly Twitter) -->
+  <a href="https://twitter.com" target="_blank">
+    <img src="https://img.shields.io/badge/X(Twitter)-000000?style=for-the-badge&logo=x&logoColor=white" alt="X" />
+  </a>
+  &nbsp;&nbsp;
+
+  <!-- LinkedIn -->
+  <a href="https://linkedin.com/in/me-akshat-negi/" target="_blank">
+    <img src="https://img.shields.io/badge/LinkedIn-1E88E5?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn" />
+  </a>
+  &nbsp;&nbsp;
+
+  <!-- LeetCode -->
+  <a href="https://leetcode.com/AkshatNegi27" target="_blank">
+    <img src="https://img.shields.io/badge/LEETCODE-FFA116?style=for-the-badge&logo=leetcode&logoColor=white" alt="LeetCode" />
+  </a>
+  &nbsp;&nbsp;
+
+  <!-- GeeksforGeeks -->
+  <a href="https://auth.geeksforgeeks.org/user/akshatnegi27/profile" target="_blank">
+    <img src="https://img.shields.io/badge/GFG-00C853?style=for-the-badge&logo=geeksforgeeks&logoColor=white" alt="GeeksforGeeks" />
+  </a>
+  &nbsp;&nbsp;
+
+  <!-- Portfolio -->
+  <a href="https://akshatnegi.vercel.app" target="_blank">
+    <img src="https://img.shields.io/badge/PORTFOLIO-121212?style=for-the-badge&logo=firefox-browser&logoColor=white" alt="Portfolio" />
+  </a>
+</p>
+
+
+
