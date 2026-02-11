@@ -16,9 +16,6 @@
 <img align="center" width="400" src="https://steamuserimages-a.akamaihd.net/ugc/244710630325715238/DBF2154CE721814E9B0F8C6B14D1578A92A3F7B1/?imw=5000&imh=5000&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=false">
 -->
 
-<p align="center"> <img src="https://komarev.com/ghpvc/?username=akshat-negi27&label=Profile%20views&color=0e75b6&style=flat" alt="akshat-negi27" /> </p>
-
-
  <hr/>
 
 <h2 align="center">⚒️ Languages-Frameworks-Tools ⚒️</h2>
@@ -72,6 +69,12 @@
     <img src="https://img.shields.io/badge/LinkedIn-1E88E5?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn" />
   </a>
   &nbsp;&nbsp;
+
+  <!-- Hack The Box -->
+<a href="https://app.hackthebox.com/public/users/2476113" target="_blank">
+    <img src="https://img.shields.io/badge/HACKTHEBOX-97EE00?style=for-the-badge&logo=hackthebox&logoColor=white" alt="HackTheBox" />
+  </a>
+    &nbsp;&nbsp;
 
   <!-- LeetCode -->
   <a href="https://leetcode.com/AkshatNegi27" target="_blank">
