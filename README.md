@@ -9,12 +9,9 @@
 <!--
 <h1 align="center">Hi 👋, This is Akshat Negi</h1>
 -->
+<p align="center"> <img src="https://komarev.com/ghpvc/?username=akshat-negi27&label=Profile%20views&color=0e75b6&style=flat" alt="akshat-negi27" /> </p>
+
 <h3 align="center">B.Tech CSE Student | Specializing in Cybersecurity & Digital Forensics | Web Developer</h3>
-
-<!--
-
-<img align="center" width="400" src="https://steamuserimages-a.akamaihd.net/ugc/244710630325715238/DBF2154CE721814E9B0F8C6B14D1578A92A3F7B1/?imw=5000&imh=5000&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=false">
--->
 
  <hr/>
 
