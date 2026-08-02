@@ -1,6 +1,9 @@
 name: Update GitHub Stats
 
 on:
+  push:
+    branches:
+      - main
   schedule:
     - cron: '0 0 * * *' # Runs daily at midnight UTC
   workflow_dispatch: # Allows manual trigger from GitHub UI
@@ -8,6 +11,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
@@ -25,7 +30,7 @@ jobs:
       - name: Run Stats Generator
         env:
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-          USER_NAME: ${{ secrets.USER_NAME }}
+          USER_NAME: "Akshat-NegI27"
         run: python today.py
 
       - name: Commit Updated SVGs
