@@ -9,10 +9,9 @@ import hashlib
 # Fine-grained personal access token with All Repositories access:
 # Account permissions: read:Followers, read:Starring, read:Watching
 # Repository permissions: read:Commit statuses, read:Contents, read:Issues, read:Metadata, read:Pull Requests
-# Issues and pull requests permissions not needed at the moment, but may be used in the future
 HEADERS = {'authorization': 'token '+ os.environ['ACCESS_TOKEN']}
 USER_NAME = os.environ['USER_NAME'] # 'Andrew6rant'
-QUERY_COUNT = {'user_getter': 0, 'follower_getter': 0, 'graph_repos_stars': 0, 'recursive_loc': 0, 'graph_commits': 0, 'loc_query': 0}
+QUERY_COUNT = {'user_getter': 0, 'follower_getter': 0, 'graph_repos_stars': 0, 'recursive_loc': 0, 'graph_commits': 0, 'loc_query': 0, 'fetch_github_stats': 0}
 
 
 def daily_readme(birthday):
@@ -31,11 +30,6 @@ def daily_readme(birthday):
 def format_plural(unit):
     """
     Returns a properly formatted number
-    e.g.
-    'day' + format_plural(diff.days) == 5
-    >>> '5 days'
-    'day' + format_plural(diff.days) == 1
-    >>> '1 day'
     """
     return 's' if unit != 1 else ''
 
@@ -174,9 +168,6 @@ def loc_counter_one_repo(owner, repo_name, data, cache_comment, history, additio
 def loc_query(owner_affiliation, comment_size=0, force_cache=False, cursor=None, edges=[]):
     """
     Uses GitHub's GraphQL v4 API to query all the repositories I have access to (with respect to owner_affiliation)
-    Queries 60 repos at a time, because larger queries give a 502 timeout error and smaller queries send too many
-    requests and also give a 502 error.
-    Returns the total number of lines of code in all repositories
     """
     query_count('loc_query')
     query = '''
@@ -218,7 +209,6 @@ def loc_query(owner_affiliation, comment_size=0, force_cache=False, cursor=None,
 def cache_builder(edges, comment_size, force_cache, loc_add=0, loc_del=0):
     """
     Checks each repository in edges to see if it has been updated since the last time it was cached
-    If it has, run recursive_loc on that repository to update the LOC count
     """
     cached = True # Assume all repositories are cached
     filename = 'cache/'+hashlib.sha256(USER_NAME.encode('utf-8')).hexdigest()+'.txt' # Create a unique filename for each user
@@ -265,7 +255,6 @@ def cache_builder(edges, comment_size, force_cache, loc_add=0, loc_del=0):
 def flush_cache(edges, filename, comment_size):
     """
     Wipes the cache file
-    This is called when the number of repositories changes or when the file is first created
     """
     with open(filename, 'r') as f:
         data = []
@@ -280,7 +269,6 @@ def flush_cache(edges, filename, comment_size):
 def add_archive():
     """
     Several repositories I have contributed to have since been deleted.
-    This function adds them using their last known data
     """
     with open('cache/repository_archive.txt', 'r') as f:
         data = f.readlines()
@@ -296,10 +284,10 @@ def add_archive():
     added_commits += int(old_data[-1].split()[4][:-1])
     return [added_loc, deleted_loc, added_loc - deleted_loc, added_commits, contributed_repos]
 
+
 def force_close_file(data, cache_comment):
     """
     Forces the file to close, preserving whatever data was written to it
-    This is needed because if this function is called, the program would've crashed before the file is properly saved and closed
     """
     filename = 'cache/'+hashlib.sha256(USER_NAME.encode('utf-8')).hexdigest()+'.txt'
     with open(filename, 'w') as f:
@@ -317,27 +305,154 @@ def stars_counter(data):
     return total_stars
 
 
-def svg_overwrite(filename, age_data, commit_data, star_data, repo_data, contrib_data, follower_data, loc_data):
+def fetch_github_stats(username):
     """
-    Parse SVG files and update elements with my age, commits, stars, repositories, and lines written
+    Fetches followers, following, issues, pull requests count, and paginates through
+    all owned repositories to sum stars and forks.
+    """
+    query_count('fetch_github_stats')
+    followers = 0
+    following = 0
+    issues = 0
+    pull_requests = 0
+    repos = 0
+    stars = 0
+    forks = 0
+    
+    cursor = None
+    has_next = True
+    
+    query = '''
+    query ($login: String!, $cursor: String) {
+        user(login: $login) {
+            followers {
+                totalCount
+            }
+            following {
+                totalCount
+            }
+            issues {
+                totalCount
+            }
+            pullRequests {
+                totalCount
+            }
+            repositories(first: 100, after: $cursor, ownerAffiliations: OWNER) {
+                totalCount
+                edges {
+                    node {
+                        stargazerCount
+                        forkCount
+                    }
+                }
+                pageInfo {
+                    endCursor
+                    hasNextPage
+                }
+            }
+        }
+    }'''
+    
+    while has_next:
+        variables = {'login': username, 'cursor': cursor}
+        request = simple_request('fetch_github_stats', query, variables)
+        data = request.json()['data']['user']
+        
+        followers = data['followers']['totalCount']
+        following = data['following']['totalCount']
+        issues = data['issues']['totalCount']
+        pull_requests = data['pullRequests']['totalCount']
+        
+        repos = data['repositories']['totalCount']
+        for edge in data['repositories']['edges']:
+            stars += edge['node']['stargazerCount']
+            forks += edge['node']['forkCount']
+            
+        cursor = data['repositories']['pageInfo']['endCursor']
+        has_next = data['repositories']['pageInfo']['hasNextPage']
+        
+    return {
+        'followers': followers,
+        'following': following,
+        'issues': issues,
+        'pull_requests': pull_requests,
+        'repos': repos,
+        'stars': stars,
+        'forks': forks
+    }
+
+
+def svg_overwrite(filename, age_data, commit_data, stats, loc_data):
+    """
+    Parse SVG files and update elements with age, commits, stats, and lines written
     """
     tree = etree.parse(filename)
     root = tree.getroot()
-    justify_format(root, 'commit_data', commit_data, 22)
-    justify_format(root, 'star_data', star_data, 14)
-    justify_format(root, 'repo_data', repo_data, 6)
-    justify_format(root, 'contrib_data', contrib_data)
-    justify_format(root, 'follower_data', follower_data, 10)
-    justify_format(root, 'loc_data', loc_data[2], 9)
-    justify_format(root, 'loc_add', loc_data[0])
-    justify_format(root, 'loc_del', loc_data[1], 7)
+    
+    # Details & Contact Alignments (matching 61-character line constraint)
     justify_format(root, 'age_data', age_data, 49)
+    
+    # Row 1: Repos and Stars
+    # Left width = 36, key is "Repos:" (6 chars). L_repo = 28 - 2 = 26.
+    justify_format(root, 'repo_data', stats['repos'], 26)
+    # Right width = 23, key is "Stars:" (6 chars). L_stars = 17 - 2 = 15.
+    justify_format(root, 'star_data', stats['stars'], 15)
+    
+    # Row 2: Following and Followers
+    # Left width = 36, key is "Following:" (10 chars). L_following = 24 - 2 = 22.
+    justify_format(root, 'following_data', stats['following'], 22)
+    # Right width = 23, key is "Followers:" (10 chars). L_follower = 13 - 2 = 11.
+    justify_format(root, 'follower_data', stats['followers'], 11)
+    
+    # Row 3: Commits and Forks
+    # Left width = 36, key is "Commits:" (8 chars). L_commits = 26 - 2 = 24.
+    justify_format(root, 'commit_data', commit_data, 24)
+    # Right width = 23, key is "Forks:" (6 chars). L_fork = 17 - 2 = 15.
+    justify_format(root, 'fork_data', stats['forks'], 15)
+    
+    # Row 4: Issues and Pull Requests
+    # Left width = 36, key is "Issues:" (7 chars). L_issues = 27 - 2 = 25.
+    justify_format(root, 'issue_data', stats['issues'], 25)
+    # Right width = 23, key is "Pull Requests:" (14 chars). L_pr = 9 - 2 = 7.
+    justify_format(root, 'pr_data', stats['pull_requests'], 7)
+    
+    # Row 5: Lines of Code
+    # We dynamically calculate the dots length for loc_data_dots so that the entire line is exactly 61 characters:
+    # 16 (for '. Lines of Code:') + len(dots) + len(loc_data) + 11 + len(loc_add) + len(loc_del) = 61
+    loc_val = loc_data[2]
+    if isinstance(loc_val, int):
+        loc_val = f"{'{:,}'.format(loc_val)}"
+    loc_add = loc_data[0]
+    if isinstance(loc_add, int):
+        loc_add = f"{'{:,}'.format(loc_add)}"
+    loc_del = loc_data[1]
+    if isinstance(loc_del, int):
+        loc_del = f"{'{:,}'.format(loc_del)}"
+        
+    find_and_replace(root, 'loc_data', str(loc_val))
+    find_and_replace(root, 'loc_add', str(loc_add))
+    find_and_replace(root, 'loc_del', str(loc_del))
+    
+    len_val = len(str(loc_val))
+    len_add = len(str(loc_add))
+    len_del = len(str(loc_del))
+    
+    # Calculate required dots to maintain a total line length of exactly 61 characters
+    just_len = 34 - len_val - len_add - len_del
+    just_len = max(0, just_len)
+    if just_len <= 2:
+        dot_map = {0: '', 1: ' ', 2: '. '}
+        dot_string = dot_map[just_len]
+    else:
+        dot_string = ' ' + ('.' * just_len) + ' '
+    find_and_replace(root, 'loc_data_dots', dot_string)
+    
     tree.write(filename, encoding='utf-8', xml_declaration=True)
 
 
 def justify_format(root, element_id, new_text, length=0):
     """
-    Updates and formats the text of the element, and modifes the amount of dots in the previous element to justify the new text on the svg
+    Updates and formats the text of the element, and modifies the amount of dots in the previous element to justify the new text on the svg
     """
     if isinstance(new_text, int):
         new_text = f"{'{:,}'.format(new_text)}"
@@ -367,9 +482,11 @@ def commit_counter(comment_size):
     """
     total_commits = 0
     filename = 'cache/'+hashlib.sha256(USER_NAME.encode('utf-8')).hexdigest()+'.txt' # Use the same filename as cache_builder
-    with open(filename, 'r') as f:
-        data = f.readlines()
-    cache_comment = data[:comment_size] # save the comment block
+    try:
+        with open(filename, 'r') as f:
+            data = f.readlines()
+    except FileNotFoundError:
+        return 0
     data = data[comment_size:] # remove those lines
     for line in data:
         total_commits += int(line.split()[2])
@@ -392,22 +509,6 @@ def user_getter(username):
     request = simple_request(user_getter.__name__, query, variables)
     return {'id': request.json()['data']['user']['id']}, request.json()['data']['user']['createdAt']
 
-def follower_getter(username):
-    """
-    Returns the number of followers of the user
-    """
-    query_count('follower_getter')
-    query = '''
-    query($login: String!){
-        user(login: $login) {
-            followers {
-                totalCount
-            }
-        }
-    }'''
-    request = simple_request(follower_getter.__name__, query, {'login': username})
-    return int(request.json()['data']['user']['followers']['totalCount'])
-
 
 def query_count(funct_id):
     """
@@ -420,7 +521,6 @@ def query_count(funct_id):
 def perf_counter(funct, *args):
     """
     Calculates the time it takes for a function to run
-    Returns the function result and the time differential
     """
     start = time.perf_counter()
     funct_return = funct(*args)
@@ -430,7 +530,6 @@ def perf_counter(funct, *args):
 def formatter(query_type, difference, funct_return=False, whitespace=0):
     """
     Prints a formatted time differential
-    Returns formatted result if whitespace is specified, otherwise returns raw result
     """
     print('{:<23}'.format('   ' + query_type + ':'), sep='', end='')
     print('{:>12}'.format('%.4f' % difference + ' s ')) if difference > 1 else print('{:>12}'.format('%.4f' % (difference * 1000) + ' ms'))
@@ -440,12 +539,7 @@ def formatter(query_type, difference, funct_return=False, whitespace=0):
 
 
 if __name__ == '__main__':
-    """
-    Andrew Grant (Andrew6rant), 2022-2025
-    """
     print('Calculation times:')
-    # define global variable for owner ID and calculate user's creation date
-    # e.g {'id': 'MDQ6VXNlcjU3MzMxMTM0'} and 2019-11-03T21:15:07Z for username 'Andrew6rant'
     user_data, user_time = perf_counter(user_getter, USER_NAME)
     OWNER_ID, acc_date = user_data
     formatter('account data', user_time)
@@ -455,28 +549,26 @@ if __name__ == '__main__':
     total_loc, loc_time = perf_counter(loc_query, ['OWNER', 'COLLABORATOR', 'ORGANIZATION_MEMBER'], 7)
     formatter('LOC (cached)', loc_time) if total_loc[-1] else formatter('LOC (no cache)', loc_time)
     commit_data, commit_time = perf_counter(commit_counter, 7)
-    star_data, star_time = perf_counter(graph_repos_stars, 'stars', ['OWNER'])
-    repo_data, repo_time = perf_counter(graph_repos_stars, 'repos', ['OWNER'])
-    contrib_data, contrib_time = perf_counter(graph_repos_stars, 'repos', ['OWNER', 'COLLABORATOR', 'ORGANIZATION_MEMBER'])
-    follower_data, follower_time = perf_counter(follower_getter, USER_NAME)
+    stats, stats_time = perf_counter(fetch_github_stats, USER_NAME)
+    formatter('GitHub stats fetch', stats_time)
 
     # several repositories that I've contributed to have since been deleted.
     if OWNER_ID == {'id': 'MDQ6VXNlcjU3MzMxMTM0'}: # only calculate for user Andrew6rant
         archived_data = add_archive()
         for index in range(len(total_loc)-1):
             total_loc[index] += archived_data[index]
-        contrib_data += archived_data[-1]
+        stats['repos'] += archived_data[-1]
         commit_data += int(archived_data[-2])
 
     for index in range(len(total_loc)-1): total_loc[index] = '{:,}'.format(total_loc[index]) # format added, deleted, and total LOC
 
-    svg_overwrite('dark_mode.svg', age_data, commit_data, star_data, repo_data, contrib_data, follower_data, total_loc[:-1])
-    svg_overwrite('light_mode.svg', age_data, commit_data, star_data, repo_data, contrib_data, follower_data, total_loc[:-1])
+    svg_overwrite('dark_mode.svg', age_data, commit_data, stats, total_loc[:-1])
+    svg_overwrite('light_mode.svg', age_data, commit_data, stats, total_loc[:-1])
 
-    # move cursor to override 'Calculation times:' with 'Total function time:' and the total function time, then move cursor back
-    print('\033[F\033[F\033[F\033[F\033[F\033[F\033[F\033[F',
-        '{:<21}'.format('Total function time:'), '{:>11}'.format('%.4f' % (user_time + age_time + loc_time + commit_time + star_time + repo_time + contrib_time)),
-        ' s \033[E\033[E\033[E\033[E\033[E\033[E\033[E\033[E', sep='')
+    # move cursor to override 'Calculation times:' with 'Total function time:'
+    print('\033[F\033[F\033[F\033[F\033[F\033[F\033[F',
+        '{:<21}'.format('Total function time:'), '{:>11}'.format('%.4f' % (user_time + age_time + loc_time + commit_time + stats_time)),
+        ' s \033[E\033[E\033[E\033[E\033[E\033[E\033[E', sep='')
 
     print('Total GitHub GraphQL API calls:', '{:>3}'.format(sum(QUERY_COUNT.values())))
     for funct_name, count in QUERY_COUNT.items(): print('{:<28}'.format('   ' + funct_name + ':'), '{:>6}'.format(count))
