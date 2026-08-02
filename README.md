@@ -5,7 +5,11 @@
 
 <p align="center">
 <img src="https://readme-typing-svg.herokuapp.com?font=Oxanium&weight=800&size=21&pause=1000&color=F7F7F7&center=true&vCenter=true&width=434&height=62&lines=THIS+IS+AKSHAT+NEGI;SPECIALIZED+IN+CYBER+SECURITY"></a></p>
-
+<p align="center">
+  <a href="https://app.hackthebox.com/public/users/2476113" target="_blank">
+    <img src="https://www.hackthebox.eu/badge/image/2476113" alt="Akshat Negi HTB Profile" />
+  </a>
+</p>
 <!--
 <h1 align="center">Hi 👋, This is Akshat Negi</h1>
 -->
