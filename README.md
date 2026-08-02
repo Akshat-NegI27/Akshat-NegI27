@@ -1,3 +1,14 @@
+<p align="center">
+  <a href="https://github.com/jeantimex/neofetch-profile">
+    <picture>
+      <source media="(prefers-color-scheme: dark)" srcset="https://neofetch-profile.vercel.app/api?username=Akshat-NegI27&theme=github-dark">
+      <img alt="Neofetch Profile" src="https://neofetch-profile.vercel.app/api?username=Akshat-NegI27&theme=github-light">
+    </picture>
+  </a>
+</p>
+
+
+
 <!-- ![logo](https://github.com/Akshat-NegI27/Akshat-NegI27/blob/main/logo.png) -->
 <p align="center">
 <img align="center" alt="coding"  width="500" src="https://github.com/Akshat-NegI27/Akshat-NegI27/blob/main/logo2.gif">
