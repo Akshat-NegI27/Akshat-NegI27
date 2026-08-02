@@ -2,22 +2,22 @@ import re
 import os
 import base64
 
-# The contact section matches dark.svg's y-coordinates exactly
+# The contact/details section aligned perfectly to column 32 (prefix length 31 chars)
 def get_right_side_block(fill_color):
     return f"""<text x="390" y="30" fill="{fill_color}">
 <tspan x="390" y="30">akshat@negi</tspan> -———————————————————————————————————————————-—-
-<tspan x="390" y="50" class="cc">. </tspan><tspan class="key">OS</tspan>:<tspan class="cc"> ........................ </tspan><tspan class="value">Windows 11, Android 14, Linux</tspan>
+<tspan x="390" y="50" class="cc">. </tspan><tspan class="key">OS</tspan>:<tspan class="cc"> .......................... </tspan><tspan class="value">Windows 11, Android 14, Linux</tspan>
 <tspan x="390" y="70" class="cc">. </tspan><tspan class="key">Uptime</tspan>:<tspan class="cc" id="age_data_dots"> ...................... </tspan><tspan class="value" id="age_data">2 years, 5 months, 29 days</tspan>
-<tspan x="390" y="90" class="cc">. </tspan><tspan class="key">Host</tspan>:<tspan class="cc"> ............................. </tspan><tspan class="value">Student / Developer</tspan>
-<tspan x="390" y="110" class="cc">. </tspan><tspan class="key">Kernel</tspan>:<tspan class="cc"> ...... </tspan><tspan class="value">Pentester &amp; Security Researcher</tspan>
-<tspan x="390" y="130" class="cc">. </tspan><tspan class="key">IDE</tspan>:<tspan class="cc"> ........................ </tspan><tspan class="value">VS Code, Neovim</tspan>
+<tspan x="390" y="90" class="cc">. </tspan><tspan class="key">Host</tspan>:<tspan class="cc"> ........................ </tspan><tspan class="value">Student / Developer</tspan>
+<tspan x="390" y="110" class="cc">. </tspan><tspan class="key">Kernel</tspan>:<tspan class="cc"> ...................... </tspan><tspan class="value">Pentester &amp; Security Researcher</tspan>
+<tspan x="390" y="130" class="cc">. </tspan><tspan class="key">IDE</tspan>:<tspan class="cc"> ......................... </tspan><tspan class="value">VS Code, Neovim</tspan>
 <tspan x="390" y="150" class="cc">. </tspan>
-<tspan x="390" y="170" class="cc">. </tspan><tspan class="key">Languages</tspan>.<tspan class="key">Programming</tspan>:<tspan class="cc"> ..... </tspan><tspan class="value">JavaScript, Python, C, Java</tspan>
-<tspan x="390" y="190" class="cc">. </tspan><tspan class="key">Languages</tspan>.<tspan class="key">Computer</tspan>:<tspan class="cc"> ......... </tspan><tspan class="value">HTML, CSS, SQL, JSON</tspan>
-<tspan x="390" y="210" class="cc">. </tspan><tspan class="key">Languages</tspan>.<tspan class="key">Real</tspan>:<tspan class="cc"> ......................... </tspan><tspan class="value">English, Hindi</tspan>
+<tspan x="390" y="170" class="cc">. </tspan><tspan class="key">Languages</tspan>.<tspan class="key">Programming</tspan>:<tspan class="cc"> ....... </tspan><tspan class="value">JavaScript, Python, C, Java</tspan>
+<tspan x="390" y="190" class="cc">. </tspan><tspan class="key">Languages</tspan>.<tspan class="key">Computer</tspan>:<tspan class="cc"> .......... </tspan><tspan class="value">HTML, CSS, SQL, JSON</tspan>
+<tspan x="390" y="210" class="cc">. </tspan><tspan class="key">Languages</tspan>.<tspan class="key">Real</tspan>:<tspan class="cc"> .............. </tspan><tspan class="value">English, Hindi</tspan>
 <tspan x="390" y="230" class="cc">. </tspan>
-<tspan x="390" y="250" class="cc">. </tspan><tspan class="key">Hobbies</tspan>.<tspan class="key">Software</tspan>:<tspan class="cc"> .... </tspan><tspan class="value">Cybersecurity, Web Dev</tspan>
-<tspan x="390" y="270" class="cc">. </tspan><tspan class="key">Hobbies</tspan>.<tspan class="key">Hardware</tspan>:<tspan class="cc"> ............. </tspan><tspan class="value">PC Building, Gaming</tspan>
+<tspan x="390" y="250" class="cc">. </tspan><tspan class="key">Hobbies</tspan>.<tspan class="key">Software</tspan>:<tspan class="cc"> ............ </tspan><tspan class="value">Cybersecurity, Web Dev</tspan>
+<tspan x="390" y="270" class="cc">. </tspan><tspan class="key">Hobbies</tspan>.<tspan class="key">Hardware</tspan>:<tspan class="cc"> ............ </tspan><tspan class="value">PC Building, Gaming</tspan>
 <tspan x="390" y="310">- Contact</tspan> -——————————————————————————————————————————————-—-
 <tspan x="390" y="330" class="cc">. </tspan><tspan class="key">Email</tspan>:<tspan class="cc"> ........................ </tspan><tspan class="value">akshatnegi27@gmail.com</tspan>
 <tspan x="390" y="350" class="cc">. </tspan><tspan class="key">LinkedIn</tspan>:<tspan class="cc"> ..................... </tspan><tspan class="value">me-akshat-negi</tspan>
