@@ -1,4 +1,5 @@
 {
+  "image": "https://raw.githubusercontent.com/Akshat-NegI27/Akshat-NegI27/main/ascii-art%20(1).png",
   "sections": [
     {
       "title": "{{username}}@github",
@@ -28,7 +29,7 @@
         { "key": "Email", "value": "{{email}}" },
         { "key": "Website", "value": "https://github.com/{{username}}" },
         { "key": "Twitter", "value": "{{twitter}}" },
-        { "key": "LeetCode", "value": "https://leetcode.com/u/{{username}}/" }
+        { "key": "LeetCode", "value": "https://leetcode.com/AkshatNegi27" }
       ]
     }
   ],
@@ -38,7 +39,7 @@
       { "left": { "key": "Repos", "value": "{{repos}}" }, "right": { "key": "Stars", "value": "{{stars}}" } },
       { "left": { "key": "Following", "value": "{{following}}" }, "right": { "key": "Followers", "value": "{{followers}}" } },
       { "left": { "key": "Commits", "value": "{{commits}}" }, "right": { "key": "Forks", "value": "{{forks}}" } },
-      { "left": { "key": "Issues", "value": "{{issues}}" }, "right": { "key": "Pull Requests", "value": "{{prs}}" } },
+      { "left": { "key": "Issues", "value": "{{issues}}" }, "right": { "key": "PRs", "value": "{{prs}}" } },
       "loc"
     ]
   }
