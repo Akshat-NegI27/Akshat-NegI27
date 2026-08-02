@@ -30,12 +30,16 @@ def update_svg(filename, text_color, base64_image):
     with open(filename, 'r', encoding='utf-8') as f:
         content = f.read()
     
+    # 1. Add xlink namespace to root svg element if not present
+    if 'xmlns:xlink' not in content:
+        content = content.replace('<svg xmlns="http://www.w3.org/2000/svg"', '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"')
+        
     # Revert height back to 530px (matching dark.svg)
     content = content.replace('height="510px"', 'height="530px"')
     content = content.replace('height="510"', 'height="530"')
     
-    # 2. Replace the ASCII block or old image block with base64 PNG data URI
-    image_block = f'<image x="20" y="40" width="350" height="450" href="data:image/png;base64,{base64_image}"/>'
+    # 2. Replace the ASCII block or old image block with base64 PNG data URI (supporting both href and xlink:href)
+    image_block = f'<image x="20" y="40" width="350" height="450" href="data:image/png;base64,{base64_image}" xlink:href="data:image/png;base64,{base64_image}"/>'
     pattern_left = re.compile(r'(<text\s+[^>]*class="ascii">.*?</text>|<image\s+[^>]*/>)', re.DOTALL)
     content = pattern_left.sub(image_block, content)
     
