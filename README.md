@@ -11,7 +11,7 @@
 -->
 <p align="center"> <img src="https://komarev.com/ghpvc/?username=akshat-negi27&label=Profile%20views&color=0e75b6&style=flat" alt="akshat-negi27" /> </p>
 
-<h3 align="center">B.Tech CSE Student | Specializing in Cybersecurity & Digital Forensics | Web Developer</h3>
+<h3 align="center">Pentester & Security Researcher | Active CTF Player | Full Stack Developer</h3>
 
  <hr/>
 
