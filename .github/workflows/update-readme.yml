@@ -26,7 +26,7 @@ jobs:
         env:
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
           USER_NAME: ${{ secrets.USER_NAME }}
-        run: python generate_stats.py
+        run: python today.py
 
       - name: Commit Updated SVGs
         run: |
