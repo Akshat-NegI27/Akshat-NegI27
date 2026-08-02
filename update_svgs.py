@@ -1,48 +1,6 @@
 import re
 import os
 
-# 1. Downscale the ASCII art using full original width
-def downscale_ascii(input_file, target_width=35, target_height=25):
-    with open(input_file, 'r', encoding='utf-8') as f:
-        lines = [line.rstrip('\r\n') for line in f.readlines()]
-    
-    while lines and not lines[0].strip():
-        lines.pop(0)
-    while lines and not lines[-1].strip():
-        lines.pop()
-        
-    orig_height = len(lines)
-    if orig_height == 0:
-        return [" " * target_width] * target_height
-        
-    # Calculate the original width dynamically to capture all data
-    orig_width = max(len(line) for line in lines)
-    
-    output = []
-    for y in range(target_height):
-        orig_y = int(y * orig_height / target_height)
-        orig_line = lines[orig_y]
-        new_line = ""
-        for x in range(target_width):
-            orig_x = int(x * orig_width / target_width)
-            if orig_x < len(orig_line):
-                new_line += orig_line[orig_x]
-            else:
-                new_line += " "
-        output.append(new_line)
-    return output
-
-def format_ascii_svg(ascii_lines, text_color):
-    tspan_template = '  <tspan x="15" y="{y}">{line}</tspan>'
-    formatted_lines = []
-    for i, line in enumerate(ascii_lines):
-        line_escaped = line.replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;').replace('"', '&quot;')
-        y_val = 30 + i * 20
-        formatted_lines.append(tspan_template.format(y=y_val, line=line_escaped))
-    
-    block = f'<text x="15" y="30" fill="{text_color}" class="ascii">\n' + '\n'.join(formatted_lines) + '\n</text>'
-    return block
-
 # The contact section matches dark.svg's y-coordinates exactly
 def get_right_side_block(fill_color):
     return f"""<text x="390" y="30" fill="{fill_color}">
@@ -67,7 +25,7 @@ def get_right_side_block(fill_color):
 <tspan x="390" y="410" class="cc">. </tspan><tspan class="key">Portfolio</tspan>:<tspan class="cc"> .................... </tspan><tspan class="value">akshatnegi.vercel.app</tspan>
 \n"""
 
-def update_svg(filename, ascii_block, text_color):
+def update_svg(filename, text_color):
     with open(filename, 'r', encoding='utf-8') as f:
         content = f.read()
     
@@ -75,12 +33,13 @@ def update_svg(filename, ascii_block, text_color):
     content = content.replace('height="510px"', 'height="530px"')
     content = content.replace('height="510"', 'height="530"')
     
-    # 2. Replace the ASCII block
-    pattern_ascii = re.compile(r'<text\s+[^>]*class="ascii">.*?</text>', re.DOTALL)
-    content = pattern_ascii.sub(ascii_block, content)
+    # 2. Replace the ASCII block or old image block with the new PNG image element
+    # Dimensions 350x450 scaled to fit 360px width beautifully on the left
+    image_block = '<image x="20" y="40" width="350" height="450" href="https://raw.githubusercontent.com/Akshat-NegI27/Akshat-NegI27/main/art.png"/>'
+    pattern_left = re.compile(r'(<text\s+[^>]*class="ascii">.*?</text>|<image\s+[^>]*/>)', re.DOTALL)
+    content = pattern_left.sub(image_block, content)
     
     # 3. Replace the right-side text block (up to GitHub Stats line)
-    # The lookahead target matches the stats header line y="450"
     pattern_right = re.compile(r'<text\s+x="390"\s+y="30"\s+fill="[^"]+">.*?(?=<tspan\s+x="390"\s+y="450">- GitHub Stats</tspan>)', re.DOTALL)
     right_block = get_right_side_block(text_color)
     content = pattern_right.sub(right_block, content)
@@ -90,15 +49,11 @@ def update_svg(filename, ascii_block, text_color):
     print(f"Updated {filename} successfully.")
 
 def main():
-    ascii_lines = downscale_ascii("ascii-art (2).txt", target_width=35)
-    
     # Dark Mode SVG update
-    dark_ascii_block = format_ascii_svg(ascii_lines, "#c9d1d9")
-    update_svg("dark_mode.svg", dark_ascii_block, "#c9d1d9")
+    update_svg("dark_mode.svg", "#c9d1d9")
     
     # Light Mode SVG update
-    light_ascii_block = format_ascii_svg(ascii_lines, "#24292f")
-    update_svg("light_mode.svg", light_ascii_block, "#24292f")
+    update_svg("light_mode.svg", "#24292f")
 
 if __name__ == '__main__':
     main()
