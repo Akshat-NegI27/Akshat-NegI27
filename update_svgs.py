@@ -1,5 +1,6 @@
 import re
 import os
+import base64
 
 # The contact section matches dark.svg's y-coordinates exactly
 def get_right_side_block(fill_color):
@@ -25,7 +26,7 @@ def get_right_side_block(fill_color):
 <tspan x="390" y="410" class="cc">. </tspan><tspan class="key">Portfolio</tspan>:<tspan class="cc"> .................... </tspan><tspan class="value">akshatnegi.vercel.app</tspan>
 \n"""
 
-def update_svg(filename, text_color):
+def update_svg(filename, text_color, base64_image):
     with open(filename, 'r', encoding='utf-8') as f:
         content = f.read()
     
@@ -33,9 +34,8 @@ def update_svg(filename, text_color):
     content = content.replace('height="510px"', 'height="530px"')
     content = content.replace('height="510"', 'height="530"')
     
-    # 2. Replace the ASCII block or old image block with the new PNG image element
-    # Dimensions 350x450 scaled to fit 360px width beautifully on the left
-    image_block = '<image x="20" y="40" width="350" height="450" href="https://raw.githubusercontent.com/Akshat-NegI27/Akshat-NegI27/main/art.png"/>'
+    # 2. Replace the ASCII block or old image block with base64 PNG data URI
+    image_block = f'<image x="20" y="40" width="350" height="450" href="data:image/png;base64,{base64_image}"/>'
     pattern_left = re.compile(r'(<text\s+[^>]*class="ascii">.*?</text>|<image\s+[^>]*/>)', re.DOTALL)
     content = pattern_left.sub(image_block, content)
     
@@ -49,11 +49,15 @@ def update_svg(filename, text_color):
     print(f"Updated {filename} successfully.")
 
 def main():
+    # Read and encode the PNG file to base64
+    with open("art.png", "rb") as img_file:
+        base64_image = base64.b64encode(img_file.read()).decode('utf-8')
+        
     # Dark Mode SVG update
-    update_svg("dark_mode.svg", "#c9d1d9")
+    update_svg("dark_mode.svg", "#c9d1d9", base64_image)
     
     # Light Mode SVG update
-    update_svg("light_mode.svg", "#24292f")
+    update_svg("light_mode.svg", "#24292f", base64_image)
 
 if __name__ == '__main__':
     main()
