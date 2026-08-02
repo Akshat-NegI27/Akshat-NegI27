@@ -17,29 +17,29 @@ text, tspan {white-space: pre;}
 </style>
 <rect width="985px" height="530px" fill="#161b22" rx="15"/>
 <text x="15" y="30" fill="#c9d1d9" class="ascii">
-  <tspan x="15" y="30">                   :.              </tspan>
-  <tspan x="15" y="50">                 ;;                </tspan>
-  <tspan x="15" y="70">                        x    &amp;&amp;&amp;   </tspan>
-  <tspan x="15" y="90">                       &amp;        +  </tspan>
-  <tspan x="15" y="110">                  $:               </tspan>
-  <tspan x="15" y="130">                        $&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;  </tspan>
-  <tspan x="15" y="150">                     &amp;$x++XxXXX++&amp;&amp;</tspan>
-  <tspan x="15" y="170">                    xx    xX$$$&amp;&amp;&amp;&amp;</tspan>
-  <tspan x="15" y="190">                   &amp;&amp;&amp;&amp;&amp;  :x&amp;X;&amp;&amp;&amp;&amp;</tspan>
-  <tspan x="15" y="210">                &amp;  &amp;$$&amp;XX$X$&amp;&amp;X::;:</tspan>
-  <tspan x="15" y="230">                ;..&amp;&amp;&amp;&amp;+       &amp;;&amp;&amp;</tspan>
-  <tspan x="15" y="250">                 x&amp;&amp;&amp;$&amp;$ &amp;  &amp;&amp;&amp; .x$</tspan>
-  <tspan x="15" y="270">                    &amp;&amp;&amp;$&amp;&amp;&amp;&amp;$&amp;&amp;&amp;&amp;&amp;x</tspan>
-  <tspan x="15" y="290">                    &amp; +X&amp;&amp;&amp;&amp;$&amp;&amp;&amp;&amp;x </tspan>
-  <tspan x="15" y="310">                    &amp;$$X        ;$&amp;</tspan>
-  <tspan x="15" y="330">                   &amp; &amp;&amp;X&amp;&amp;&amp;$$+;&amp;&amp;&amp;&amp;</tspan>
-  <tspan x="15" y="350">              &amp;&amp;&amp;x &amp;&amp;&amp;. &amp;&amp;::&amp;&amp;&amp;&amp;&amp;  </tspan>
-  <tspan x="15" y="370">        &amp;&amp;&amp;&amp;:&amp;&amp;;   &amp;&amp;     .&amp;&amp;&amp;&amp;&amp;  &amp;</tspan>
-  <tspan x="15" y="390">   &amp;&amp;.            XXX&amp;    &amp;&amp;&amp;&amp;&amp;    </tspan>
-  <tspan x="15" y="410">                  ;&amp;&amp;:  .&amp;&amp;&amp;&amp;:     </tspan>
-  <tspan x="15" y="430"> .                &amp;&amp;      &amp;&amp;       </tspan>
-  <tspan x="15" y="450">                  &amp;       X        </tspan>
-  <tspan x="15" y="470">                  &amp;                </tspan>
+  <tspan x="15" y="30">            :                 .;;  </tspan>
+  <tspan x="15" y="50">          .;                   :;  </tspan>
+  <tspan x="15" y="70">               x  &amp;&amp;               </tspan>
+  <tspan x="15" y="90">              &amp;       &amp;&amp;&amp;          </tspan>
+  <tspan x="15" y="110">           $:       &amp;    &amp;&amp;      .;</tspan>
+  <tspan x="15" y="130">               $&amp;&amp;&amp;&amp;  X&amp;&amp;          </tspan>
+  <tspan x="15" y="150">             &amp;x+X+Xxx&amp;  &amp; +   :+   </tspan>
+  <tspan x="15" y="170">             x  x$$&amp;&amp;&amp;&amp;            </tspan>
+  <tspan x="15" y="190">            &amp;&amp;&amp; :$XX&amp;&amp;&amp;   .        </tspan>
+  <tspan x="15" y="210">          &amp; &amp;$XXX&amp;&amp;;;::   $x$&amp;+    </tspan>
+  <tspan x="15" y="230">          X.&amp;&amp;+    XX&amp;&amp; &amp;   ;$     </tspan>
+  <tspan x="15" y="250">           &amp;&amp;$$   &amp; .$&amp;&amp;  +  ;     </tspan>
+  <tspan x="15" y="270">             &amp;$&amp;&amp;$&amp;&amp;&amp;x&amp;    .       </tspan>
+  <tspan x="15" y="290">              X&amp;&amp;$&amp;&amp;x     .        </tspan>
+  <tspan x="15" y="310">             $X     &amp;&amp;             </tspan>
+  <tspan x="15" y="330">            &amp;&amp;X&amp;&amp;$+.&amp;&amp;&amp;&amp;           </tspan>
+  <tspan x="15" y="350">         &amp;&amp; &amp;&amp; &amp;:&amp;&amp;&amp;&amp; &amp;&amp;&amp;&amp;         </tspan>
+  <tspan x="15" y="370">     &amp;&amp; &amp;&amp;  &amp;   .&amp;&amp;&amp; &amp;&amp;&amp;&amp; X&amp;&amp;&amp;     </tspan>
+  <tspan x="15" y="390">  &amp;&amp;       XX&amp;  &amp;&amp;&amp;     &amp;+  X&amp;&amp;&amp;&amp;&amp; </tspan>
+  <tspan x="15" y="410">           ;&amp;: .&amp;&amp;:             .x&amp;</tspan>
+  <tspan x="15" y="430">           &amp;&amp;   &amp;                 &amp;</tspan>
+  <tspan x="15" y="450">           &amp;    X                + </tspan>
+  <tspan x="15" y="470">           &amp;                      &amp;</tspan>
   <tspan x="15" y="490">                                   </tspan>
   <tspan x="15" y="510">                                   </tspan>
 </text>

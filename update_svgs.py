@@ -1,7 +1,7 @@
 import re
 import os
 
-# 1. Downscale the ASCII art
+# 1. Downscale the ASCII art using full original width
 def downscale_ascii(input_file, target_width=35, target_height=25):
     with open(input_file, 'r', encoding='utf-8') as f:
         lines = [line.rstrip('\r\n') for line in f.readlines()]
@@ -14,7 +14,9 @@ def downscale_ascii(input_file, target_width=35, target_height=25):
     orig_height = len(lines)
     if orig_height == 0:
         return [" " * target_width] * target_height
-    orig_width = 50
+        
+    # Calculate the original width dynamically to capture all data
+    orig_width = max(len(line) for line in lines)
     
     output = []
     for y in range(target_height):
