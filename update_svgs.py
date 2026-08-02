@@ -41,7 +41,7 @@ def format_ascii_svg(ascii_lines, text_color):
     block = f'<text x="15" y="30" fill="{text_color}" class="ascii">\n' + '\n'.join(formatted_lines) + '\n</text>'
     return block
 
-# The contact section has perfectly aligned values now
+# The contact section has perfectly aligned values starting at column 32
 def get_right_side_block(fill_color):
     return f"""<text x="390" y="30" fill="{fill_color}">
 <tspan x="390" y="30">akshat@negi</tspan> -———————————————————————————————————————————-—-
@@ -58,33 +58,30 @@ def get_right_side_block(fill_color):
 <tspan x="390" y="250" class="cc">. </tspan><tspan class="key">Hobbies</tspan>.<tspan class="key">Software</tspan>:<tspan class="cc"> .... </tspan><tspan class="value">Cybersecurity, Web Dev</tspan>
 <tspan x="390" y="270" class="cc">. </tspan><tspan class="key">Hobbies</tspan>.<tspan class="key">Hardware</tspan>:<tspan class="cc"> ............. </tspan><tspan class="value">PC Building, Gaming</tspan>
 <tspan x="390" y="290">- Contact</tspan> -——————————————————————————————————————————————-—-
-<tspan x="390" y="310" class="cc">. </tspan><tspan class="key">Email</tspan>:<tspan class="cc"> ................................ </tspan><tspan class="value">akshatnegi27@gmail.com</tspan>
-<tspan x="390" y="330" class="cc">. </tspan><tspan class="key">LinkedIn</tspan>:<tspan class="cc"> ............................. </tspan><tspan class="value">me-akshat-negi</tspan>
-<tspan x="390" y="350" class="cc">. </tspan><tspan class="key">LeetCode</tspan>:<tspan class="cc"> ............................. </tspan><tspan class="value">AkshatNegi27</tspan>
-<tspan x="390" y="370" class="cc">. </tspan><tspan class="key">GFG</tspan>:<tspan class="cc"> .................................. </tspan><tspan class="value">akshatnegi27</tspan>
-<tspan x="390" y="390" class="cc">. </tspan><tspan class="key">Portfolio</tspan>:<tspan class="cc"> ............................ </tspan><tspan class="value">akshatnegi.vercel.app</tspan>
+<tspan x="390" y="310" class="cc">. </tspan><tspan class="key">Email</tspan>:<tspan class="cc"> ........................ </tspan><tspan class="value">akshatnegi27@gmail.com</tspan>
+<tspan x="390" y="330" class="cc">. </tspan><tspan class="key">LinkedIn</tspan>:<tspan class="cc"> ..................... </tspan><tspan class="value">me-akshat-negi</tspan>
+<tspan x="390" y="350" class="cc">. </tspan><tspan class="key">LeetCode</tspan>:<tspan class="cc"> ..................... </tspan><tspan class="value">AkshatNegi27</tspan>
+<tspan x="390" y="370" class="cc">. </tspan><tspan class="key">GFG</tspan>:<tspan class="cc"> .......................... </tspan><tspan class="value">akshatnegi27</tspan>
+<tspan x="390" y="390" class="cc">. </tspan><tspan class="key">Portfolio</tspan>:<tspan class="cc"> .................... </tspan><tspan class="value">akshatnegi.vercel.app</tspan>
 \n"""
 
 def update_svg(filename, ascii_block, text_color):
     with open(filename, 'r', encoding='utf-8') as f:
         content = f.read()
     
+    # Ensure height is set to 510px
     content = content.replace('height="530px"', 'height="510px"')
+    content = content.replace('height="530"', 'height="510"')
     
     # 2. Replace the ASCII block
     pattern_ascii = re.compile(r'<text\s+[^>]*class="ascii">.*?</text>', re.DOTALL)
     content = pattern_ascii.sub(ascii_block, content)
     
     # 3. Replace the right-side text block (up to GitHub Stats line)
-    pattern_right = re.compile(r'<text\s+x="390"\s+y="30"\s+fill="[^"]+">.*?(?=<tspan\s+x="390"\s+y="(?:430|450)">- GitHub Stats</tspan>)', re.DOTALL)
+    # The lookahead target matches the stats header line y="430"
+    pattern_right = re.compile(r'<text\s+x="390"\s+y="30"\s+fill="[^"]+">.*?(?=<tspan\s+x="390"\s+y="430">- GitHub Stats</tspan>)', re.DOTALL)
     right_block = get_right_side_block(text_color)
     content = pattern_right.sub(right_block, content)
-    
-    # 4. Shift y-values of the stats lines
-    content = content.replace('y="450">- GitHub Stats', 'y="430">- GitHub Stats')
-    content = content.replace('y="470" class="cc"', 'y="450" class="cc"')
-    content = content.replace('y="490" class="cc"', 'y="470" class="cc"')
-    content = content.replace('y="510" class="cc"', 'y="490" class="cc"')
     
     with open(filename, 'w', encoding='utf-8') as f:
         f.write(content)
